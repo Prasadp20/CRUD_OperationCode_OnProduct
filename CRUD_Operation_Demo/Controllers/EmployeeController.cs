@@ -5,39 +5,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD_Operation_Demo.Controllers
 {
-    public class ProductController : Controller
+    public class EmployeeController : Controller
     {
-        ProductDAL db = new ProductDAL();    // create this new object here ProductDAL class
-        // GET: ProductController
+        EmployeeDAL db = new EmployeeDAL();
+        // GET: EmployeeController
         public ActionResult Index()
         {
-            var model = db.GetAllProducts();             // modify here
+            var model = db.GetAllEmployee();
             return View(model);
         }
 
-        // GET: ProductController/Details/5
+        // GET: EmployeeController/Details/5
         public ActionResult Details(int id)
         {
-            var model = db.GetProductById(id);             // modify here
+            var model = db.GetEmployeeById(id);
             return View(model);
         }
 
-        // GET: ProductController/Create
+        // GET: EmployeeController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ProductController/Create
+        // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Employee employee)
         {
-
             try
             {
-                int result = db.AddProduct(product);
-                if (result == 1)
+                int result = db.AddEmployee(employee);
+                    if (result == 1)
                     return RedirectToAction(nameof(Index));
                 else
                     return View();
@@ -48,21 +47,21 @@ namespace CRUD_Operation_Demo.Controllers
             }
         }
 
-        // GET: ProductController/Edit/5
+        // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
-            var model = db.GetProductById(id);
+            var model = db.GetEmployeeById(id);
             return View(model);
         }
 
-        // POST: ProductController/Edit/5
+        // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Employee employee)
         {
             try
             {
-                int result = db.UpdateProduct(product);
+                int result = db.UpdateEmployee(employee);
                 if (result == 1)
                     return RedirectToAction(nameof(Index));
                 else
@@ -74,16 +73,14 @@ namespace CRUD_Operation_Demo.Controllers
             }
         }
 
-
-
-        // GET: ProductController/Delete/5
+        // GET: EmployeeController/Delete/5
         public ActionResult Delete(int id)
         {
-            var model = db.GetProductById(id);
+            var model = db.GetEmployeeById(id);
             return View(model);
         }
 
-        // POST: ProductController/Delete/5
+        // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
@@ -91,13 +88,11 @@ namespace CRUD_Operation_Demo.Controllers
         {
             try
             {
-                int result = db.DeleteProduct(id);
+                int result = db.DeleteEmployee(id);
                 if (result == 1)
                     return RedirectToAction(nameof(Index));
                 else
                     return View();
-
-                return RedirectToAction(nameof(Index));
             }
             catch
             {
